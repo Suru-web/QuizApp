@@ -10,7 +10,7 @@ class QuizApp extends StatefulWidget {
   }
 }
 
-const backGroundColor = Color(0xff490091);
+const backGroundColor = Color(0xffE0F4FF);
 
 class _QuizAppState extends State<QuizApp> {
   var currentScreen = 'start-screen';

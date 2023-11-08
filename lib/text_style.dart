@@ -11,6 +11,7 @@ class StyleText extends StatelessWidget {
       textData,
       textAlign: TextAlign.center,
       style: TextStyle(
+        fontFamily: 'Comfortaa',
         color: color1,
         fontSize: sizeFont,
       ),

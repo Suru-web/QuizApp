@@ -11,14 +11,17 @@ class HomeScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
-            "assets/images/quiz-logo.png",
+            "assets/images/onepiece.png",
             width: 300,
-            color: const Color.fromARGB(150, 255, 193, 7),
           ),
           const SizedBox(
             height: 80,
           ),
-          const StyleText(Colors.white, "Learning Flutter in a fun way", 24),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child:
+                StyleText(Colors.black, "Learning One Piece in a fun way", 24),
+          ),
           const SizedBox(
             height: 40,
           ),
