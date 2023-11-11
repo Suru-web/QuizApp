@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/answer_button.dart';
+import 'package:quiz/result_screen.dart';
 import 'package:quiz/text_style.dart';
 import 'package:quiz/data/questions.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({super.key});
+  const QuestionScreen({super.key, required this.selectAnswer});
+  final void Function(String answer) selectAnswer;
   @override
   State<QuestionScreen> createState() {
     return _QuestionScreen();
@@ -14,6 +16,8 @@ class QuestionScreen extends StatefulWidget {
 var currentIndex = 0;
 var questionNum = 1;
 var numberOfQuestions = 0;
+int totalCorrectAnswer = 0;
+List<String> putAnswersChecking = [];
 
 class _QuestionScreen extends State<QuestionScreen> {
   @override
@@ -33,7 +37,7 @@ class _QuestionScreen extends State<QuestionScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Image.asset(
                       isAntiAlias: true,
@@ -55,7 +59,9 @@ class _QuestionScreen extends State<QuestionScreen> {
                         ), // Adjust the margin to control the spacing
                         child: AnswerButton(
                           answerText: answer,
-                          onTap: saveAns,
+                          onTap: () {
+                            saveAns(answer);
+                          },
                         ),
                       );
                     })
@@ -69,12 +75,34 @@ class _QuestionScreen extends State<QuestionScreen> {
     );
   }
 
-  void saveAns() {
+  void saveAns(String selectedAnswer) {
+    widget.selectAnswer(selectedAnswer);
+    putAnswersChecking.add(selectedAnswer);
+    print(putAnswersChecking);
+
     if (currentIndex < numberOfQuestions - 1) {
       setState(() {
         currentIndex++;
         questionNum++;
       });
+    } else if (currentIndex <= numberOfQuestions) {
+      print(countAnswers());
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const ResultScreen(),
+            settings: RouteSettings(arguments: putAnswersChecking)),
+      );
     }
+  }
+
+  int countAnswers() {
+    int count = 0;
+    for (int i = 0; i < numberOfQuestions; i++) {
+      if (questions[i].answers[0] == putAnswersChecking[i]) {
+        count++;
+      }
+    }
+    return count;
   }
 }

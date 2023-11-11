@@ -28,7 +28,7 @@ class _QuizAppState extends State<QuizApp> {
         backgroundColor: backGroundColor,
         body: currentScreen == 'start-screen'
             ? HomeScreen(switchScreen)
-            : const QuestionScreen(),
+            : QuestionScreen(selectAnswer: (String answer) {}),
       ),
     );
   }
