@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/text_style.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen(this.quizStart, {super.key});

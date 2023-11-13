@@ -26,6 +26,7 @@ class _QuestionScreen extends State<QuestionScreen> {
     numberOfQuestions = questions.length;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.red.shade700,
         title: StyleText(Colors.white, "Question Number $questionNum", 21),
@@ -77,8 +78,10 @@ class _QuestionScreen extends State<QuestionScreen> {
 
   void saveAns(String selectedAnswer) {
     widget.selectAnswer(selectedAnswer);
-    putAnswersChecking.add(selectedAnswer);
-    print(putAnswersChecking);
+    if (putAnswersChecking.length < 10) {
+      print("hello");
+      putAnswersChecking.add(selectedAnswer);
+    }
 
     if (currentIndex < numberOfQuestions - 1) {
       setState(() {
